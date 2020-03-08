@@ -11,7 +11,7 @@ import uvicorn, aiohttp, asyncio
 import base64, sys, numpy as np
 
 path = Path(__file__).parent
-model_file_url = 'https://drive.google.com/uc?export=download&id=155dbQXvVIFny4IavBKPxod9QZ-GeU8f7.h5' #DIRECT / RAW DOWNLOAD URL HERE!'
+model_file_url = 'https://github.com/fchollet/deep-learning-models/releases/download/v0.1/vgg16_weights_tf_dim_ordering_tf_kernels.h5' #DIRECT / RAW DOWNLOAD URL HERE!'
 model_file_name = 'model'
 
 app = Starlette()
