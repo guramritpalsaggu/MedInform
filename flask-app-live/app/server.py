@@ -11,7 +11,7 @@ import uvicorn, aiohttp, asyncio
 import base64, sys, numpy as np
 
 path = Path(__file__).parent
-model_file_url = 'https://github.com/guramritpalsaggu/Medical_Image_Analysis/blob/master/flask-app-live/app/models/malaria2.h5/raw=true' #DIRECT / RAW DOWNLOAD URL HERE!'
+model_file_url = 'https://github.com/guramritpalsaggu/Medical_Image_Analysis/blob/master/flask-app-live/app/models/malaria2.h5?raw=true' #DIRECT / RAW DOWNLOAD URL HERE!'
 model_file_name = 'malaria2'
 
 
