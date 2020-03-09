@@ -11,8 +11,8 @@ import uvicorn, aiohttp, asyncio
 import base64, sys, numpy as np
 
 path = Path(__file__).parent
-model_file_url = 'https://raw.githubusercontent.com/Rubiel1/Fashion-Mnist-trained/master/fashionDR.h5' #DIRECT / RAW DOWNLOAD URL HERE!'
-model_file_name = 'fashionDR'
+model_file_url = 'https://github.com/guramritpalsaggu/Medical_Image_Analysis/blob/master/flask-app-live/app/models/malaria2.h5/raw=true' #DIRECT / RAW DOWNLOAD URL HERE!'
+model_file_name = 'malaria2'
 
 
 app = Starlette()
@@ -32,7 +32,7 @@ async def download_file(url, dest):
 
 async def setup_model():
     #UNCOMMENT HERE FOR CUSTOM TRAINED MODEL
-    await download_file(model_file_url, MODEL_PATH)
+    # await download_file(model_file_url, MODEL_PATH)
     model = load_model(MODEL_PATH) # Load your Custom trained model
     model._make_predict_function()
     # model = ResNet50(weights='imagenet') # COMMENT, IF you have Custom trained model
