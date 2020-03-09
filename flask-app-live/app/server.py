@@ -11,13 +11,13 @@ import uvicorn, aiohttp, asyncio
 import base64, sys, numpy as np
 
 path = Path(__file__).parent
-model_file_url = 'https://github.com/guramritpalsaggu/Medical_Image_Analysis/blob/master/flask-app-live/app/models/malaria2.h5?raw=true' #DIRECT / RAW DOWNLOAD URL HERE!'
+# model_file_url = 'https://github.com/guramritpalsaggu/Medical_Image_Analysis/blob/master/flask-app-live/app/models/malaria2.h5?raw=true' #DIRECT / RAW DOWNLOAD URL HERE!'
 model_file_name = 'malaria2'
 
 
 app = Starlette()
 app.add_middleware(CORSMiddleware, allow_origins=['*'], allow_headers=['X-Requested-With', 'Content-Type'])
-app.mount('/static', StaticFiles(directory='app/static'))
+app.mount('/static', StaticFiles(directory='static'))
 
 MODEL_PATH = path/'models'/f'{model_file_name}.h5'
 IMG_FILE_SRC = path/'static'/'saved_image.png'
@@ -46,11 +46,16 @@ loop.close()
 
 @app.route("/upload", methods=["POST"])
 async def upload(request):
-    data = await request.form()
-    img_bytes = await (data["img"].read())
-    bytes = base64.b64decode(img_bytes)
-    with open(IMG_FILE_SRC, 'wb') as f: f.write(bytes)
-    return model_predict(IMG_FILE_SRC, model)
+    # data = await request.form()
+    # img_bytes = await (data["img"].read())
+    # bytes = base64.b64decode(img_bytes)
+    # with open(IMG_FILE_SRC, 'wb') as f: f.write(bytes)
+    # return model_predict(IMG_FILE_SRC, model)
+    img_data = await request.form()
+    img_bytes = await (img_data['img'].read())
+    img = open_image(BytesIO(img_bytes))
+    prediction = model_predict(img)[0]
+    return JSONResponse({'result': str(prediction)})
 
 def model_predict(img_path, model):
     result = []; img = image.load_img(img_path, target_size=(224, 224))
