@@ -11,15 +11,17 @@ import uvicorn, aiohttp, asyncio
 import base64, sys, numpy as np
 
 path = Path(__file__).parent
-model_file_url = 'https://raw.githubusercontent.com/hatemZamzam/Cats-vs-Dogs-Classification-CNN-Keras-/master/CorDweights.h5' #DIRECT / RAW DOWNLOAD URL HERE!'
-model_file_name = 'CorDweights'
+model_file_url = 'https://raw.githubusercontent.com/Rubiel1/Fashion-Mnist-trained/master/fashionDR.h5' #DIRECT / RAW DOWNLOAD URL HERE!'
+model_file_name = 'fashionDR'
+
 
 app = Starlette()
 app.add_middleware(CORSMiddleware, allow_origins=['*'], allow_headers=['X-Requested-With', 'Content-Type'])
 app.mount('/static', StaticFiles(directory='app/static'))
 
 MODEL_PATH = path/'models'/f'{model_file_name}.h5'
-IMG_FILE_SRC = '/tmp/saved_image.png'
+IMG_FILE_SRC = path/'static'/'saved_image.png'
+PREDICTION_FILE_SRC = path/'static'/'predictions.txt'
 
 async def download_file(url, dest):
     if dest.exists(): return
