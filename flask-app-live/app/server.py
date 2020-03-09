@@ -12,7 +12,7 @@ import base64, sys, numpy as np
 
 path = Path(__file__).parent
 model_file_url = 'https://raw.githubusercontent.com/hatemZamzam/Cats-vs-Dogs-Classification-CNN-Keras-/master/CorDweights.h5' #DIRECT / RAW DOWNLOAD URL HERE!'
-model_file_name = 'model'
+model_file_name = 'CorDweights'
 
 app = Starlette()
 app.add_middleware(CORSMiddleware, allow_origins=['*'], allow_headers=['X-Requested-With', 'Content-Type'])
