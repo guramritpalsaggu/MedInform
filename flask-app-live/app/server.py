@@ -11,13 +11,13 @@ import uvicorn, aiohttp, asyncio
 import base64, sys, numpy as np
 
 path = Path(__file__).parent
-# model_file_url = 'https://github.com/guramritpalsaggu/Medical_Image_Analysis/blob/master/flask-app-live/app/models/malaria2.h5?raw=true' #DIRECT / RAW DOWNLOAD URL HERE!'
+model_file_url = 'https://github.com/guramritpalsaggu/Medical_Image_Analysis/blob/master/flask-app-live/app/models/malaria2.h5?raw=true' #DIRECT / RAW DOWNLOAD URL HERE!'
 model_file_name = 'malaria2'
 
 
 app = Starlette()
 app.add_middleware(CORSMiddleware, allow_origins=['*'], allow_headers=['X-Requested-With', 'Content-Type'])
-app.mount('/static', StaticFiles(directory='static'))
+app.mount('/static', StaticFiles(directory='app/static'))
 
 MODEL_PATH = path/'models'/f'{model_file_name}.h5'
 IMG_FILE_SRC = path/'static'/'saved_image.png'
