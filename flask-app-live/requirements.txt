@@ -1,4 +1,4 @@
-﻿tensorflow-mkl
+﻿tensorflow
 Keras
 gevent
 pillow
