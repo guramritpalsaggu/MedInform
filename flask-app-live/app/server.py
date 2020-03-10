@@ -17,7 +17,7 @@ model_file_name = 'malaria2'
 
 app = Starlette()
 app.add_middleware(CORSMiddleware, allow_origins=['*'], allow_headers=['X-Requested-With', 'Content-Type'])
-app.mount('app/static', StaticFiles(directory='static'))
+app.mount('/static', StaticFiles(directory='app/static'))
 
 MODEL_PATH = path/'models'/f'{model_file_name}.h5'
 IMG_FILE_SRC = path/'static'/'saved_image.png'
