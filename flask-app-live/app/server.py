@@ -17,7 +17,7 @@ model_file_name = 'malaria2'
 
 app = Starlette()
 app.add_middleware(CORSMiddleware, allow_origins=['*'], allow_headers=['X-Requested-With', 'Content-Type'])
-app.mount('/static', StaticFiles(directory='app/static'))
+app.mount('/static', StaticFiles(directory='static'))
 
 MODEL_PATH = path/'models'/f'{model_file_name}.h5'
 IMG_FILE_SRC = path/'static'/'saved_image.png'
@@ -47,16 +47,21 @@ loop.close()
 @app.route("/upload", methods=["POST"])
 async def upload(request):
     data = await request.form()
-    img_bytes = await (data["img"].read())
+    img_bytes = (data["img"])
     bytes = base64.b64decode(img_bytes)
     with open(IMG_FILE_SRC, 'wb') as f: f.write(bytes)
     return model_predict(IMG_FILE_SRC, model)
 
 def model_predict(img_path, model):
-    result = []; img = image.load_img(img_path, target_size=(224, 224))
+    result = []; img = image.load_img(img_path, target_size=(125, 125))
     x = preprocess_input(np.expand_dims(image.img_to_array(img), axis=0))
-    predictions = decode_predictions(model.predict(x), top=3)[0] # Get Top-3 Accuracy
-    for p in predictions: _,label,accuracy = p; result.append((label,accuracy))
+    # predictions = decode_predictions(model.predict(x), top=3)[0] # Get Top-3 Accuracy
+    # for p in predictions: _,label,accuracy = p; result.append((label,accuracy))
+    predictions = model.predict(x)
+    if predictions <= 0.5:
+    	result.append('parasitic')
+    else:
+    	result.append('normal')
     result_html1 = path/'static'/'result1.html'
     result_html2 = path/'static'/'result2.html'
     result_html = str(result_html1.open().read() +str(result) + result_html2.open().read())
@@ -68,4 +73,4 @@ def form(request):
     return HTMLResponse(index_html.open().read())
 
 if __name__ == "__main__":
-    if "serve" in sys.argv: uvicorn.run(app, host="0.0.0.0", port=8080)
+    uvicorn.run(app, host="0.0.0.0", port=8080)
