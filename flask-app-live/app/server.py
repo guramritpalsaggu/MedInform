@@ -71,6 +71,5 @@ def model_predict(img_path, model):
 def form(request):
     index_html = path/'static'/'index.html'
     return HTMLResponse(index_html.open().read())
-
 if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=8080)
+    if "serve" in sys.argv: uvicorn.run(app, host="0.0.0.0", port=8080)
