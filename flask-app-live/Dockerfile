@@ -1,10 +1,12 @@
-FROM python:3.6-slim-stretch
+FROM jjanzic/docker-python3-opencv
+
+COPY . /app
+
+WORKDIR /app
 
 RUN apt-get update && apt-get install -y python3-dev gcc \
     && rm -rf /var/lib/apt/lists/*
     
-RUN apt-get install libglib2.0-0=2.48.0-1ubuntu4
-
 COPY requirements.txt .
 
 RUN pip install --no-cache-dir -r requirements.txt
