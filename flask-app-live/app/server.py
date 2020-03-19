@@ -18,10 +18,10 @@ model_file_name = 'malaria2'
 
 app = Starlette()
 app.add_middleware(CORSMiddleware, allow_origins=['*'], allow_headers=['X-Requested-With', 'Content-Type'])
-app.mount('/static', StaticFiles(directory='static'))
+app.mount('/static', StaticFiles(directory='app/static'))
 
 MODEL_PATH = path/'models'/f'{model_file_name}.h5'
-IMG_FILE_SRC = 'static/saved_image.png'
+IMG_FILE_SRC = path/'static'/'saved_image.png'
 PREDICTION_FILE_SRC = path/'static'/'predictions.txt'
 
 async def download_file(url, dest):
