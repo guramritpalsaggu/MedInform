@@ -21,8 +21,8 @@ app.add_middleware(CORSMiddleware, allow_origins=['*'], allow_headers=['X-Reques
 app.mount('/static', StaticFiles(directory='app/static'))
 
 MODEL_PATH = path/'models'/f'{model_file_name}.h5'
-# IMG_FILE_SRC = path/'static'/'saved_image.png'
-IMG_FILE_SRC = '/static/saved_image.png'
+IMG_FILE_SRC_1 = path/'static'/'saved_image.png'
+IMG_FILE_SRC_2 = 'static/saved_image.png'
 PREDICTION_FILE_SRC = path/'static'/'predictions.txt'
 
 async def download_file(url, dest):
@@ -51,8 +51,8 @@ async def upload(request):
     data = await request.form()
     img_bytes = (data["img"])
     bytes = base64.b64decode(img_bytes)
-    with open(IMG_FILE_SRC, 'wb') as f: f.write(bytes)
-    return model_predict(IMG_FILE_SRC, model)
+    with open(IMG_FILE_SRC_1, 'wb') as f: f.write(bytes)
+    return model_predict(IMG_FILE_SRC_2, model)
 
 def model_predict(img_path, model):
     result = []; img = cv2.imread(img_path)
