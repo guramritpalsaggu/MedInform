@@ -22,7 +22,7 @@ app.mount('/static', StaticFiles(directory='app/static'))
 
 MODEL_PATH = path/'models'/f'{model_file_name}.h5'
 # IMG_FILE_SRC = path/'static'/'saved_image.png'
-IMG_FILE_SRC = 'static/saved_image.png'
+IMG_FILE_SRC = '/static/saved_image.png'
 PREDICTION_FILE_SRC = path/'static'/'predictions.txt'
 
 async def download_file(url, dest):
