@@ -57,6 +57,7 @@ async def upload(request):
 def model_predict(img_path, model):
     result = []; img = image.load_img(img_path, target_size=(125, 125))
 #     img = cv2.resize(img, dsize=(125, 125), interpolation=cv2.INTER_CUBIC)
+    img = np.array(img)
     kernel = np.array([[0,-1,0],[-1,6,-1],[0,-1,0]])
     img = cv2.filter2D(img, -1, kernel)
     img_yuv = cv2.cvtColor(img, cv2.COLOR_RGB2YUV)
