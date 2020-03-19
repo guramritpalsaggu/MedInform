@@ -21,8 +21,8 @@ app.add_middleware(CORSMiddleware, allow_origins=['*'], allow_headers=['X-Reques
 app.mount('/static', StaticFiles(directory='app/static'))
 
 MODEL_PATH = path/'models'/f'{model_file_name}.h5'
-IMG_FILE_SRC_1 = path/'static'/'saved_image.png'
-IMG_FILE_SRC_2 = 'static/saved_image.png'
+IMG_FILE_SRC = path/'static'/'saved_image.png'
+# IMG_FILE_SRC_2 = 'static/saved_image.png'
 PREDICTION_FILE_SRC = path/'static'/'predictions.txt'
 
 async def download_file(url, dest):
@@ -51,15 +51,15 @@ async def upload(request):
     data = await request.form()
     img_bytes = (data["img"])
     bytes = base64.b64decode(img_bytes)
-    with open(IMG_FILE_SRC_1, 'wb') as f: f.write(bytes)
-    return model_predict(IMG_FILE_SRC_2, model)
+    with open(IMG_FILE_SRC, 'wb') as f: f.write(bytes)
+    return model_predict(IMG_FILE_SRC, model)
 
 def model_predict(img_path, model):
-    result = []; img = cv2.imread(img_path)
-    img = cv2.resize(img, dsize=(125, 125), interpolation=cv2.INTER_CUBIC)
+    result = []; img = image.load_img(img_path, target_size=(125, 125))
+#     img = cv2.resize(img, dsize=(125, 125), interpolation=cv2.INTER_CUBIC)
     kernel = np.array([[0,-1,0],[-1,6,-1],[0,-1,0]])
     img = cv2.filter2D(img, -1, kernel)
-    img_yuv = cv2.cvtColor(img, cv2.COLOR_BGR2YUV)
+    img_yuv = cv2.cvtColor(img, cv2.COLOR_RGB2YUV)
     img_yuv[:, :, 0] = cv2.equalizeHist(img_yuv[:, :, 0])
     x = cv2.cvtColor(img_yuv, cv2.COLOR_YUV2RGB)
     x = np.expand_dims(x/255., axis=0)
