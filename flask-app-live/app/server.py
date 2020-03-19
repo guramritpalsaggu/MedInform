@@ -66,10 +66,10 @@ def model_predict(img_path, model):
     # for p in predictions: _,label,accuracy = p; result.append((label,accuracy))
     predictions = model.predict(x)
     if predictions <= 0.5:
-    	result.append('parasitic')
+        result.append('parasitic')
         result.append(str(1-predictions))
     else:
-    	result.append('normal')
+        result.append('normal')
         result.append(str(predictions))
     result_html1 = path/'static'/'result1.html'
     result_html2 = path/'static'/'result2.html'
