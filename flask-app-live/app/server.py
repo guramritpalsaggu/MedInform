@@ -66,11 +66,13 @@ def model_predict(img_path, model):
     # x = preprocess_input(np.expand_dims(image.img_to_array(img), axis=0))
     # predictions = decode_predictions(model.predict(x), top=3)[0] # Get Top-3 Accuracy
     # for p in predictions: _,label,accuracy = p; result.append((label,accuracy))
-    predictions = model.predictions(x)
+    predictions = model.predict(x)
     if predictions <= 0.5:
-    	result.append('parasitic')
+        result.append('parasitic')
+        result.append(str(1-predictions))
     else:
-    	result.append('normal')
+        result.append('normal')
+        result.append(str(predictions))
     result_html1 = path/'static'/'result1.html'
     result_html2 = path/'static'/'result2.html'
     result_html = str(result_html1.open().read() +str(result) + result_html2.open().read())
