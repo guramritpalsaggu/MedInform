@@ -3,7 +3,7 @@ FROM python:3.6-slim-stretch
 RUN apt-get update && apt-get install -y python3-dev gcc \
     && rm -rf /var/lib/apt/lists/*
     
-RUN apt-get install libglib2.0-dev
+RUN apt-get install libglib2.0-0=2.48.0-1ubuntu4
 
 COPY requirements.txt .
 
