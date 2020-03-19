@@ -54,8 +54,7 @@ async def upload(request):
     return model_predict(IMG_FILE_SRC, model)
 
 def model_predict(img_path, model):
-    result = [];
-    img = cv2.imread(img_path)
+    result = []; img = cv2.imread(img_path)
     img = cv2.resize(img, dsize=(125, 125), interpolation=cv2.INTER_CUBIC)
     kernel = np.array([[0,-1,0],[-1,6,-1],[0,-1,0]])
     img = cv2.filter2D(img, -1, kernel)
@@ -63,15 +62,14 @@ def model_predict(img_path, model):
     img_yuv[:, :, 0] = cv2.equalizeHist(img_yuv[:, :, 0])
     x = cv2.cvtColor(img_yuv, cv2.COLOR_YUV2RGB)
     x = np.expand_dims(x/255., axis=0)
-    # x = preprocess_input(np.expand_dims(image.img_to_array(img), axis=0))
     # predictions = decode_predictions(model.predict(x), top=3)[0] # Get Top-3 Accuracy
     # for p in predictions: _,label,accuracy = p; result.append((label,accuracy))
     predictions = model.predict(x)
     if predictions <= 0.5:
-        result.append('parasitic')
+    	result.append('parasitic')
         result.append(str(1-predictions))
     else:
-        result.append('normal')
+    	result.append('normal')
         result.append(str(predictions))
     result_html1 = path/'static'/'result1.html'
     result_html2 = path/'static'/'result2.html'
@@ -82,6 +80,5 @@ def model_predict(img_path, model):
 def form(request):
     index_html = path/'static'/'index.html'
     return HTMLResponse(index_html.open().read())
-
 if __name__ == "__main__":
     if "serve" in sys.argv: uvicorn.run(app, host="0.0.0.0", port=8080)
