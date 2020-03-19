@@ -10,3 +10,4 @@ python-multipart
 aiofiles
 aiohttp
 opencv-python
+libglib2.0-0
