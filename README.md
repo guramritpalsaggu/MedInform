@@ -4,8 +4,6 @@ Production ready starter pack for creating fast responsive Web App for Keras Ima
 
 Everything packaged in docker with requirement.txt, so you can push it to any docker hosted cloud service. Enjoy :)
 
-Few dockers hosted services where this starter pack should work =>
-
 * https://render.com
 * https://zeit.co/now
 * https://azure.microsoft.com/en-us/services/app-service/containers/
