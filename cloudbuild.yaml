@@ -1,21 +1,21 @@
 steps:
     # Build the container image
-    - name: 'gcr.io/cloud-builders/docker'
-      args: ['build', '-t', 'gcr.io/medinform-278512/github.com:$COMMIT_SHA', '.']
+- name: 'gcr.io/cloud-builders/docker'
+   args: ['build', '-t', 'gcr.io/medinform-278512/github.com:$COMMIT_SHA', '.']
     # Push the image to Container Registry
-    - name: 'gcr.io/cloud-builders/docker'
-      args: ['push', 'gcr.io/medinform-278512/github.com:$COMMIT_SHA']
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['push', 'gcr.io/medinform-278512/github.com:$COMMIT_SHA']
     # Deploy image to Cloud Run
-    - name: 'gcr.io/cloud-builders/gcloud'
-      args:
-      - 'run'
-      - 'deploy'
-      - 'medicalimageanalysis'
-      - '--image'
-      - 'gcr.io/medinform-278512/github.com:$COMMIT_SHA'
-      - '--region'
-      - 'asia-east1'
-      - '--platform'
-      - 'managed'
-    images:
-    - gcr.io/medinform-278512/github.com
+  - name: 'gcr.io/cloud-builders/gcloud'
+  args:
+  - 'run'
+  - 'deploy'
+  - 'medicalimageanalysis'
+  - '--image'
+  - 'gcr.io/medinform-278512/github.com:$COMMIT_SHA'
+  - '--region'
+  - 'asia-east1'
+  - '--platform'
+  - 'managed'
+images:
+  - gcr.io/medinform-278512/github.com
