@@ -1,0 +1,85 @@
+
+.particle{
+   position:fixed;
+   width: 100%;
+   height: 100%;
+   background-size: cover;
+   z-index: -2;
+   top: 0;
+}
+.intro {
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+      background: url('../Images/illu3.jpg') no-repeat center center; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+@media (max-width: 1180px) {
+  .intro {
+    max-width: 100%
+  }
+}
+
+.intro--banner {
+  position: relative;
+  height: 475px;
+  padding: 2%;
+  left:200px;
+}
+.intro--banner p{
+  color: white;
+}
+.intro--banner h1 {
+  position: relative;
+  font-size: 60px;
+  font-weight: 900;
+  line-height: 1;
+  z-index: 1;
+  color: yellow;
+}
+@media (max-width: 900px) {
+  .intro--banner {
+    height: 380px;
+    left: 160px;
+  }
+  .intro--banner h1 {
+    font-size: 55px
+  }
+}
+
+@media (max-width: 767px) {
+  .intro--banner {
+    height: 305px;
+    left:120px;
+  }
+  .intro--banner h1 {
+    font-size: 44px
+  }
+}
+
+@media (max-width: 600px) {
+  .intro--banner {
+    height: 360px;
+    left: 80px;
+  }
+  .intro--banner h1 {
+    font-size: 55px
+  }
+}
+.logo{
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  width: 5%;
+  height: auto;
+  z-index: 2;
+}

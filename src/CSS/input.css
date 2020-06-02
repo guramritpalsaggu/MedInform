@@ -1,0 +1,30 @@
+.main{
+	overflow: hidden;
+	margin: 5%;
+	font-family: sans-serif;
+}
+
+.container{
+	background: #E6E9EA;
+	height: auto;
+	border: 2px dashed;
+	max-width: 800px;
+	transition: .51s;
+}
+.container:hover{
+	transform: scale(1.2);
+	cursor: pointer;
+	background: aliceblue;
+}
+.cont{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100px;
+}
+.sub{
+	float: left;
+}
+.head{
+	color: #EEEB25;
+}

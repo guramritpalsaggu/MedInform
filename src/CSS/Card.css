@@ -1,0 +1,281 @@
+
+
+.read-more {
+     text-align: left;
+}
+ .read-more a {
+     color: #5ad67d;
+     display: inline-block;
+     position: relative;
+      text-decoration: none;
+      opacity: 5;
+}
+.read-more a:hover{
+    text-decoration: underline;
+}
+.read-more a:after {
+     content: "\279F";
+     font-family: FontAwesome;
+     margin-left: -10px;
+     opacity: 0;
+     vertical-align: middle;
+     transition: margin 0.3s, opacity 0.3s;
+}
+.read-more a:hover:after {
+     margin-left: 5px;
+     opacity: 1;
+     text-decoration: none;
+}
+.content p {
+     position: relative;
+     margin: 1rem 0 0;
+}
+.content p:first-of-type {
+     margin-top: 1.25rem;
+}
+ .content p:first-of-type:before {
+     content: "";
+     position: absolute;
+     height: 5px;
+     background: #5ad67d;
+     width: 35px;
+     top: -0.75rem;
+     border-radius: 3px;
+}
+    .feature {
+        display: -moz-flex;
+        display: -webkit-flex;
+        display: -ms-flex;
+        display: flex;
+        -moz-align-items: flex-start;
+        -webkit-align-items: center;
+        -ms-align-items: center;
+        align-items: flex-start;
+        margin-bottom: 2em;
+        border-radius: 10px;
+    }
+
+        .feature.left {
+            -moz-flex-direction: row;
+            -webkit-flex-direction: row;
+            -ms-flex-direction: row;
+            flex-direction: row;
+        }
+
+        .feature.right {
+            -moz-flex-direction: row-reverse;
+            -webkit-flex-direction: row-reverse;
+            -ms-flex-direction: row-reverse;
+            flex-direction: row-reverse;
+        }
+
+        .feature .image {
+            width: 48%;
+            height: auto;
+        }
+
+            .feature .image img {
+                max-width: 100%;
+            }
+
+        .feature .content {
+            padding: 0 1em;
+            width: 60%;
+        }
+        img{
+            width: 1200px;
+            height: auto;
+        }
+        @media screen and (max-width: 1280px) {
+
+            .feature {
+                margin-bottom: 2em;
+            }
+
+                .feature .content {
+                    padding: 1em;
+                }
+
+        }
+
+        @media screen and (max-width: 980px) {
+
+            .feature.left, .feature.right {
+                -moz-flex-direction: column;
+                -webkit-flex-direction: column;
+                -ms-flex-direction: column;
+                flex-direction: column;
+                width: 600px;
+            }
+
+            .feature .image {
+                width: 100%;
+            }
+
+                .feature .image img {
+                    width: 100%;
+                }
+
+            .feature .content {
+                padding: 2em 2em 0.1em 2em;
+                width: 100%;
+            }
+
+        }
+
+        @media screen and (max-width: 736px) {
+
+            .feature {
+                margin-bottom: 1em;
+                width: 300px;
+            }
+
+                .feature .content {
+                    padding: 2em 1em 0.1em 1em;
+                }
+
+        }
+
+    .feature {
+        background-color: rgba(144, 144, 144, 0.075);
+    }
+    .goto{
+        position: relative;
+        margin-left: 2em;
+
+    }
+
+/* Wrapper */
+
+    .wrapper {
+        padding: 1em 0 2em 0;
+        position: relative;
+    }
+        .wrapper > .inner {
+            margin: 0 auto;
+            width: 50em;
+        }
+
+        .wrapper.style1 {
+            background: url('../Images/bg1.jpg') no-repeat left; 
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+             background-position: 0;
+        }
+            .wrapper.style1 a {
+                color: #51BAA4;
+            }
+
+       
+
+            .wrapper.style1 , .wrapper.style1 h2, .wrapper.style1 h3, .wrapper.style1 h4, .wrapper.style1 h5, .wrapper.style1 h6 {
+                color: #555;
+            }
+
+            .wrapper.style1 blockquote {
+                border-left-color: rgba(144, 144, 144, 0.25);
+            }
+
+            .wrapper.style1 .feature {background: #D3CCE3;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #E9E4F0, #D3CCE3);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #E9E4F0, #D3CCE3); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+ }
+
+        @media screen and (max-width: 1280px) {
+
+            .wrapper {
+                padding: 6em 0 4em 0;
+            }
+
+                .wrapper > .inner {
+                    width: 65em;
+                }
+
+        }
+
+        .image {
+        border-radius: 0;
+        border: 0;
+        display: inline-block;
+        position: relative;
+    }
+
+        .image img {
+            border-radius: 0;
+            display: block;
+        }
+
+        .image.left, .image.right {
+            max-width: 40%;
+        }
+
+            .image.left img, .image.right img {
+                width: 100%;
+            }
+
+        .image.left {
+            float: left;
+            padding: 0 1.5em 1em 0;
+            top: 0.25em;
+        }
+
+        .image.right {
+            float: right;
+            padding: 0 0 1.5em 1.5em;
+            top: 0.25em;
+        }
+
+        .image.fit {
+            display: block;
+            margin: 0 0 2em 0;
+            width: 100%;
+        }
+
+            .image.fit img {
+                width: 100%;
+            }
+
+        .image.main {
+            display: block;
+            margin: 0 0 3em 0;
+            width: 100%;
+        }
+
+            .image.main img {
+                width: 100%;
+            }
+
+
+        @media screen and (max-width: 980px) {
+
+            .wrapper {
+                padding: 5em 3em 3em 3em;
+            }
+
+                .wrapper > .inner {
+                    width: 100%;
+                }
+
+        }
+
+        @media screen and (max-width: 736px) {
+
+            .wrapper {
+                padding: 3em 2em 1em 2em;
+            }
+
+        }
+
+        @media screen and (max-width: 480px) {
+
+            .wrapper {
+                padding: 2em 1em 0.1em 1em;
+            }
+
+        }
+        .card-head{
+            position: relative;
+            text-align: left;
+        }
