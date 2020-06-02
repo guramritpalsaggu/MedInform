@@ -13,7 +13,7 @@ import cv2
 
 path = Path(__file__).parent
 model_file_url = 'https://github.com/guramritpalsaggu/Medical_Image_Analysis/blob/pneumonia/app/models/pneumonia.h5?raw=true' #DIRECT / RAW DOWNLOAD URL HERE!'
-model_file_name = 'pneumonia'
+model_file_name = 'tuberculosis'
 
 
 app = Starlette()
@@ -55,7 +55,7 @@ async def upload(request):
     return model_predict(IMG_FILE_SRC, model)
 
 def model_predict(img_path, model):
-    result = []; img = image.load_img(img_path, target_size=(224, 224, 3))
+    result = []; img = image.load_img(img_path, target_size=(96, 96, 3))
 #     img = cv2.resize(img, dsize=(125, 125), interpolation=cv2.INTER_CUBIC)
     x = np.array(img)
     x = np.expand_dims(x, axis=0)
@@ -64,7 +64,7 @@ def model_predict(img_path, model):
     prediction = model.predict(x)
     predictions = prediction[0][0] 
     if predictions <= 0.5:
-        result.append('pneumonia')
+        result.append('tuberculosis')
         result.append(str(1-predictions))
     else:
         result.append('normal')
