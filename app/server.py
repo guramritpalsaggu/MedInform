@@ -18,7 +18,7 @@ model_file_name = 'pneumonia'
 
 app = Starlette()
 app.add_middleware(CORSMiddleware, allow_origins=['*'], allow_headers=['X-Requested-With', 'Content-Type'])
-app.mount('/static', StaticFiles(directory='static'))
+app.mount('/static', StaticFiles(directory='app/static'))
 
 MODEL_PATH = path/'models'/f'{model_file_name}.h5'
 IMG_FILE_SRC = path/'static'/'saved_image.png'
@@ -79,4 +79,4 @@ def form(request):
     index_html = path/'static'/'index.html'
     return HTMLResponse(index_html.open().read())
 if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=8080)
+    if "serve" in sys.argv: uvicorn.run(app, host="0.0.0.0", port=8080)
