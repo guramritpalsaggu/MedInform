@@ -1,0 +1,33 @@
+{
+  "files": {
+    "main.css": "/static/css/main.3bfde885.chunk.css",
+    "main.js": "/static/js/main.cfe8398f.chunk.js",
+    "main.js.map": "/static/js/main.cfe8398f.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.abc6811d.js",
+    "runtime-main.js.map": "/static/js/runtime-main.abc6811d.js.map",
+    "static/css/2.3c03f26f.chunk.css": "/static/css/2.3c03f26f.chunk.css",
+    "static/js/2.277763a7.chunk.js": "/static/js/2.277763a7.chunk.js",
+    "static/js/2.277763a7.chunk.js.map": "/static/js/2.277763a7.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.06abc13209e063c2383412736cc04512.js": "/precache-manifest.06abc13209e063c2383412736cc04512.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/2.3c03f26f.chunk.css.map": "/static/css/2.3c03f26f.chunk.css.map",
+    "static/css/main.3bfde885.chunk.css.map": "/static/css/main.3bfde885.chunk.css.map",
+    "static/js/2.277763a7.chunk.js.LICENSE.txt": "/static/js/2.277763a7.chunk.js.LICENSE.txt",
+    "static/media/Malaria.jpg": "/static/media/Malaria.1e9efde8.jpg",
+    "static/media/Pneumonia.jpg": "/static/media/Pneumonia.9370e78c.jpg",
+    "static/media/Tuberculosis.jpg": "/static/media/Tuberculosis.053c0011.jpg",
+    "static/media/Card.css": "/static/media/bg1.488056b1.jpg",
+    "static/media/App.css": "/static/media/illu3.c063a010.jpg",
+    "static/media/logo.jpeg": "/static/media/logo.840a5b7e.jpeg",
+    "static/media/retinopathy.jpg": "/static/media/retinopathy.c7683dbc.jpg",
+    "static/media/skin.jpg": "/static/media/skin.774f9092.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.abc6811d.js",
+    "static/css/2.3c03f26f.chunk.css",
+    "static/js/2.277763a7.chunk.js",
+    "static/css/main.3bfde885.chunk.css",
+    "static/js/main.cfe8398f.chunk.js"
+  ]
+}
