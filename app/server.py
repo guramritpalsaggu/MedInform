@@ -62,13 +62,13 @@ def model_predict(img_path, model):
     # predictions = decode_predictions(model.predict(x), top=3)[0] # Get Top-3 Accuracy
     # for p in predictions: _,label,accuracy = p; result.append((label,accuracy))
     prediction = model.predict(x)
-    predictions = prediction[0][0] 
+    predictions = float(prediction[0][0]) 
     if predictions <= 0.5:
         result.append('tuberculosis')
-        result.append(str(1-predictions))
+        result.append(round(100*(1-predictions), 2))
     else:
         result.append('normal')
-        result.append(str(predictions))
+        result.append(round(100*predictions, 2))
     result_html1 = path/'static'/'result1.html'
     result_html2 = path/'static'/'result2.html'
     result_html = str(result_html1.open().read() +str(result) + result_html2.open().read())
