@@ -1,7 +1,7 @@
-from keras.applications.imagenet_utils import preprocess_input, decode_predictions
-from keras.models import load_model
-from keras.preprocessing import image
-from keras.applications.resnet50 import ResNet50
+from tensorflow.keras.applications.imagenet_utils import preprocess_input, decode_predictions
+from tensorflow.keras.models import load_model
+from tensorflow.keras.preprocessing import image
+from tensorflow.keras.applications.resnet50 import ResNet50
 from starlette.applications import Starlette
 from starlette.responses import HTMLResponse
 from starlette.staticfiles import StaticFiles
@@ -13,14 +13,14 @@ import cv2
 
 path = Path(__file__).parent
 model_file_url = 'https://github.com/guramritpalsaggu/Medical_Image_Analysis/blob/pneumonia/app/models/pneumonia.h5?raw=true' #DIRECT / RAW DOWNLOAD URL HERE!'
-model_file_name = 'pneumonia'
+model_file_name = 'covid19'
 
 
 app = Starlette()
 app.add_middleware(CORSMiddleware, allow_origins=['*'], allow_headers=['X-Requested-With', 'Content-Type'])
 app.mount('/static', StaticFiles(directory='app/static'))
 
-MODEL_PATH = path/'models'/f'{model_file_name}.h5'
+MODEL_PATH = path/'models'/f'{model_file_name}.model'
 IMG_FILE_SRC = path/'static'/'saved_image.png'
 # IMG_FILE_SRC_2 = 'static/saved_image.png'
 PREDICTION_FILE_SRC = path/'static'/'predictions.txt'
@@ -57,18 +57,18 @@ async def upload(request):
 def model_predict(img_path, model):
     result = []; img = image.load_img(img_path, target_size=(224, 224, 3))
 #     img = cv2.resize(img, dsize=(125, 125), interpolation=cv2.INTER_CUBIC)
-    x = np.array(img)
+    x = np.array(img)/255
     x = np.expand_dims(x, axis=0)
     # predictions = decode_predictions(model.predict(x), top=3)[0] # Get Top-3 Accuracy
     # for p in predictions: _,label,accuracy = p; result.append((label,accuracy))
     prediction = model.predict(x)
-    predictions = prediction[0][0] 
+    predictions = float(prediction[0][0]) 
     if predictions <= 0.5:
-        result.append('pneumonia')
-        result.append(str(1-predictions))
+        result.append('Covid')
+        result.append(round(100*(1-predictions), 2))
     else:
         result.append('normal')
-        result.append(str(predictions))
+        result.append(round(100*predictions, 2))
     result_html1 = path/'static'/'result1.html'
     result_html2 = path/'static'/'result2.html'
     result_html = str(result_html1.open().read() +str(result) + result_html2.open().read())
@@ -80,3 +80,4 @@ def form(request):
     return HTMLResponse(index_html.open().read())
 if __name__ == "__main__":
     if "serve" in sys.argv: uvicorn.run(app, host="0.0.0.0", port=8080)
+    # uvicorn.run(app, host="0.0.0.0", port=8080)
