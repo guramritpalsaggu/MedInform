@@ -13,7 +13,7 @@ import cv2
 
 path = Path(__file__).parent
 model_file_url = 'https://github.com/guramritpalsaggu/Medical_Image_Analysis/blob/pneumonia/app/models/pneumonia.h5?raw=true' #DIRECT / RAW DOWNLOAD URL HERE!'
-model_file_name = 'pneumonia'
+model_file_name = 'skinmodel'
 
 
 app = Starlette()
@@ -58,21 +58,19 @@ async def upload(request):
     return model_predict(IMG_FILE_SRC, model)
 
 def model_predict(img_path, model):
-    result = []; img = image.load_img(img_path, target_size=(150, 150, 3))
+    result = []; img = image.load_img(img_path, target_size=(224, 224, 3))
 #     img = cv2.resize(img, dsize=(125, 125), interpolation=cv2.INTER_CUBIC)
     x = np.array(img)/255
-    x = x[:,:,0]
     x = np.expand_dims(x, axis=0)
-    x = np.expand_dims(x, axis=3)
     # predictions = decode_predictions(model.predict(x), top=3)[0] # Get Top-3 Accuracy
     # for p in predictions: _,label,accuracy = p; result.append((label,accuracy))
     prediction = model.predict(x)
-    predictions = float(prediction)
+    predictions = float(prediction[0][0])
     if predictions <= 0.5:
-        result.append('Pneumonia')
+        result.append('Malignant')
         result.append(round(100*(1-predictions), 2))
     else:
-        result.append('Normal')
+        result.append('Benign')
         result.append(round(100*predictions, 2))
     result_html1 = path/'static'/'result1.html'
     result_html2 = path/'static'/'result2.html'
