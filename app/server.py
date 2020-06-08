@@ -12,8 +12,8 @@ import base64, sys, numpy as np
 import cv2
 
 path = Path(__file__).parent
-model_file_url = 'https://github.com/guramritpalsaggu/Medical_Image_Analysis/blob/master/flask-app-live/app/models/malaria2.h5?raw=true' #DIRECT / RAW DOWNLOAD URL HERE!'
-model_file_name = 'malaria2'
+model_file_url = 'https://github.com/guramritpalsaggu/Medical_Image_Analysis/blob/pneumonia/app/models/pneumonia.h5?raw=true' #DIRECT / RAW DOWNLOAD URL HERE!'
+model_file_name = 'pneumonia'
 
 
 app = Starlette()
@@ -35,7 +35,10 @@ async def download_file(url, dest):
 async def setup_model():
     #UNCOMMENT HERE FOR CUSTOM TRAINED MODEL
     # await download_file(model_file_url, MODEL_PATH)
-    model = load_model(MODEL_PATH) # Load your Custom trained model
+    try:
+        model = load_model(MODEL_PATH) # Load your Custom trained model
+    except:
+        raise Exception("Model couldnt be loaded")
     model._make_predict_function()
     # model = ResNet50(weights='imagenet') # COMMENT, IF you have Custom trained model
     return model
@@ -55,24 +58,22 @@ async def upload(request):
     return model_predict(IMG_FILE_SRC, model)
 
 def model_predict(img_path, model):
-    result = []; img = image.load_img(img_path, target_size=(125, 125))
+    result = []; img = image.load_img(img_path, target_size=(150, 150, 3))
 #     img = cv2.resize(img, dsize=(125, 125), interpolation=cv2.INTER_CUBIC)
-    img = np.array(img)
-    kernel = np.array([[0,-1,0],[-1,6,-1],[0,-1,0]])
-    img = cv2.filter2D(img, -1, kernel)
-    img_yuv = cv2.cvtColor(img, cv2.COLOR_RGB2YUV)
-    img_yuv[:, :, 0] = cv2.equalizeHist(img_yuv[:, :, 0])
-    x = cv2.cvtColor(img_yuv, cv2.COLOR_YUV2RGB)
-    x = np.expand_dims(x/255., axis=0)
+    x = np.array(img)/255
+    x = x[:,:,0]
+    x = np.expand_dims(x, axis=0)
+    x = np.expand_dims(x, axis=3)
     # predictions = decode_predictions(model.predict(x), top=3)[0] # Get Top-3 Accuracy
     # for p in predictions: _,label,accuracy = p; result.append((label,accuracy))
-    predictions = model.predict(x)
+    prediction = model.predict(x)
+    predictions = float(prediction)
     if predictions <= 0.5:
-        result.append('parasitic')
-        result.append(str(1-predictions))
+        result.append('Pneumonia')
+        result.append(round(100*(1-predictions), 2))
     else:
-        result.append('normal')
-        result.append(str(predictions))
+        result.append('Normal')
+        result.append(round(100*predictions, 2))
     result_html1 = path/'static'/'result1.html'
     result_html2 = path/'static'/'result2.html'
     result_html = str(result_html1.open().read() +str(result) + result_html2.open().read())
@@ -83,4 +84,5 @@ def form(request):
     index_html = path/'static'/'index.html'
     return HTMLResponse(index_html.open().read())
 if __name__ == "__main__":
-    if "serve" in sys.argv: uvicorn.run(app, host="0.0.0.0", port=8080)
+     if "serve" in sys.argv: uvicorn.run(app, host="0.0.0.0", port=8080)
+     # uvicorn.run(app, host="0.0.0.0", port=8080)
