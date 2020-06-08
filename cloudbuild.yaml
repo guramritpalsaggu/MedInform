@@ -10,7 +10,7 @@ steps:
   args:
   - 'run'
   - 'deploy'
-  - 'medicalimageanalysis'
+  - 'pneumonia'
   - '--image'
   - 'gcr.io/medinform-278512/github.com:$COMMIT_SHA'
   - '--region'
