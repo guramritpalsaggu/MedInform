@@ -68,8 +68,12 @@ def model_predict(img_path, model):
     # for p in predictions: _,label,accuracy = p; result.append((label,accuracy))
     prediction = model.predict(x)
     predictions = float(prediction)
-    result.append('Covid')
-    result.append(97)
+    if predictions <= 0.5:
+        result.append('Covid')
+        result.append(round(100*(1-predictions), 2))
+    else:
+        result.append('Normal')
+        result.append(round(100*predictions, 2))
     result_html1 = path/'static'/'result1.html'
     result_html2 = path/'static'/'result2.html'
     result_html = str(result_html1.open().read() +str(result) + result_html2.open().read())
