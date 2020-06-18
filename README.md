@@ -34,7 +34,7 @@ far away places just to get tests done.
 
 ### System Design
 
-![alt text width = 400](https://github.com/guramritpalsaggu/HUSE-Tensorflow/blob/master/resources/cross-model-gap.jpg)
+![alt text width = 400](https://github.com/guramritpalsaggu/Medical_Image_Analysis/blob/master/resources/dfd.png)
 
 ### Transfer Learning
 
