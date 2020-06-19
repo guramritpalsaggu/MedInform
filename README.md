@@ -51,6 +51,6 @@ problems. We have used Resnet-50, VGG-16 & Inception V3 model to train our model
 ### Tech Stack
 - Client Side Web Application - ReactJS, JavaScript
 - Server Side - Starlette + Unicorn, Keras API
-- ML Models - Python, Tensorfloe, Keras , OpenCV
+- ML Models - Python, Tensorflow, Keras , OpenCV
 - The Ops - Docker Environment, Google Cloud Platform(GCP), Google Cloud Run and Build API(CI/CD)
 
